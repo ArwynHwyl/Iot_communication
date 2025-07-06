@@ -9,44 +9,24 @@ const config = {
 const client = new line.Client(config);
 const app = express();
 
-app.use(line.middleware(config));
 app.use(express.json());
 
-// Webhook endpoint รับ event จาก LINE
-app.post('/webhook', (req, res) => {
-  Promise.all(req.body.events.map(handleEvent))
-    .then(() => res.status(200).send('OK'))
-    .catch(err => {
-      console.error(err);
-      res.status(500).end();
-    });
-});
-
-function handleEvent(event) {
-  if (event.type === 'message' && event.message.type === 'text') {
-    console.log('User ID:', event.source.userId);
-    return client.replyMessage(event.replyToken, {
-      type: 'text',
-      text: `คุณส่งข้อความ: ${event.message.text}`
-    });
-  }
-  return Promise.resolve(null);
-}
-
-// API สำหรับส่งข้อความหา userId ที่กำหนด
+// ใส่ userId ของคุณที่ได้จาก event.source.userId
 const userId = 'U20cf5869a3af24b67096ea0dffcd7fd8';
 
 app.post('/send_line_message', async (req, res) => {
-  const message = req.body.message || 'Hello from M5Stack';
+  const message = req.body.message || "Hello from server";
+
   try {
     await client.pushMessage(userId, {
       type: 'text',
       text: message
     });
-    res.status(200).send('Message sent');
+
+    res.status(200).send('✅ Message sent to user!');
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Failed to send message');
+    console.error('[LINE PUSH ERROR]', error.response?.data || error.message);
+    res.status(500).send('❌ Failed to send message.');
   }
 });
 
