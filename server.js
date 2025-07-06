@@ -2,8 +2,8 @@ const express = require('express');
 const line = require('@line/bot-sdk');
 
 const config = {
-  channelAccessToken: 'ใส่-channel-access-token-ของคุณ',
-  channelSecret: 'ใส่-channel-secret-ของคุณ'
+  channelAccessToken: '2RSsbvuQS0i7motTGLkVzlgpMrKZkYH/2R/IsOhFX5hxDJqTNA+kOitbGDs3qdOh5Pgb8hK6gVCjbj1dswxDBUgoWk+vYQV6xXxOidck0CP3adQfZSJ9gBJO1A0FsIlY1DyJG4rKg2c2kjl9SW8tPWgdB04t89/1O/w1cDnyilFU=', // ห้ามใช้ Channel Secret นะ
+  channelSecret: 'e327f6a6eaa21063719c5ed7bead6dc8' // ใช้ของจริงที่ได้มา
 };
 
 const client = new line.Client(config);
