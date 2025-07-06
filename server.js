@@ -34,7 +34,7 @@ function handleEvent(event) {
 }
 
 // API สำหรับส่งข้อความหา userId ที่กำหนด
-const userId = 'ใส่-userId-ของคุณ-ที่ได้จาก webhook';
+const userId = 'U20cf5869a3af24b67096ea0dffcd7fd8';
 
 app.post('/send_line_message', async (req, res) => {
   const message = req.body.message || 'Hello from M5Stack';
